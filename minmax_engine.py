@@ -57,7 +57,10 @@ def eval(board):
             ]
         )
         value += hand_value if c == 0 else -hand_value
-    return value
+    if board.turn == BLACK:
+        return value
+    else:
+        return -value
 
 
 def check_board(board):

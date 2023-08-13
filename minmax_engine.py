@@ -48,9 +48,7 @@ HAND_PIECE_VALUES = [
 
 
 def eval(board):
-    value = 0
-    for piece in board.pieces:
-        value += PIECE_VALUES[piece]
+    value = sum([PIECE_VALUES[piece] for piece in board.pieces])
     for c, pieces_in_hand in enumerate(board.pieces_in_hand):
         hand_value = sum(
             [

@@ -86,12 +86,14 @@ def minmax(board, depth):
     max_value = -9999999
     for move in board.legal_moves:
         board.push(move)
-        value = check_board(board)
-        if value is None:
+        checked_value = check_board(board)
+        if checked_value is None:
             if depth > 1:
                 value = -minmax(board, depth - 1)
             else:
                 value = -eval(board)
+        else:
+            value = -checked_value
         if value > max_value:
             max_value = value
         board.pop()
@@ -120,9 +122,11 @@ def run():
                 max_value = -9999999
                 for move in board.legal_moves:
                     board.push(move)
-                    value = check_board(board)
-                    if value is None:
+                    checked_value = check_board(board)
+                    if checked_value is None:
                         value = -minmax(board, 2)
+                    else:
+                        value = -checked_value
                     if value > max_value:
                         max_value = value
                         best_move_list = [move]

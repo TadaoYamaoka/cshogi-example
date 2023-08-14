@@ -48,15 +48,15 @@ HAND_PIECE_VALUES = [
 
 
 def eval(board):
-    value = sum([PIECE_VALUES[piece] for piece in board.pieces])
-    for c, pieces_in_hand in enumerate(board.pieces_in_hand):
-        hand_value = sum(
-            [
-                HAND_PIECE_VALUES[hand_piece] * num
-                for hand_piece, num in enumerate(pieces_in_hand)
-            ]
+    value = sum(PIECE_VALUES[piece] for piece in board.pieces)
+    value += sum(
+        HAND_PIECE_VALUES[hand_piece]
+        * (
+            board.pieces_in_hand[BLACK][hand_piece]
+            - board.pieces_in_hand[WHITE][hand_piece]
         )
-        value += hand_value if c == 0 else -hand_value
+        for hand_piece in HAND_PIECES
+    )
     if board.turn == BLACK:
         return value
     else:

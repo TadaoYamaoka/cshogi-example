@@ -64,6 +64,8 @@ DRAW_VALUES = {
     REPETITION_INFERIOR: -30000,
 }
 
+SEARCH_DEPTH = 3
+
 
 def evaluate(board):
     value = sum(PIECE_VALUES[piece] for piece in board.pieces)
@@ -134,7 +136,7 @@ def run():
                     board.push(move)
                     checked_value = check_board(board)
                     if checked_value is None:
-                        value = -alphabeta(board, -beta, -alpha, 2)
+                        value = -alphabeta(board, -beta, -alpha, SEARCH_DEPTH - 1)
                     else:
                         value = -checked_value
                     board.pop()

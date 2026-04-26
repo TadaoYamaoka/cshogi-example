@@ -1,4 +1,15 @@
-from cshogi import BLACK, WHITE, HAND_PIECES, REPETITION_DRAW, REPETITION_WIN, REPETITION_LOSE, REPETITION_SUPERIOR, REPETITION_INFERIOR, Board, move_to_usi
+from cshogi import (
+    BLACK,
+    WHITE,
+    HAND_PIECES,
+    REPETITION_DRAW,
+    REPETITION_WIN,
+    REPETITION_LOSE,
+    REPETITION_SUPERIOR,
+    REPETITION_INFERIOR,
+    Board,
+    move_to_usi,
+)
 
 
 PIECE_VALUES = [
@@ -45,6 +56,14 @@ HAND_PIECE_VALUES = [
     1000,  # HROOK
 ]
 
+DRAW_VALUES = {
+    REPETITION_DRAW: 0,
+    REPETITION_WIN: 30000,
+    REPETITION_LOSE: -30000,
+    REPETITION_SUPERIOR: 30000,
+    REPETITION_INFERIOR: -30000,
+}
+
 
 def evaluate(board):
     value = sum(PIECE_VALUES[piece] for piece in board.pieces)
@@ -68,17 +87,7 @@ def check_board(board):
     if board.is_nyugyoku():
         return 30000
     draw = board.is_draw(16)
-    if draw == REPETITION_DRAW:
-        return 0
-    if draw == REPETITION_WIN:
-        return 30000
-    if draw == REPETITION_LOSE:
-        return -30000
-    if draw == REPETITION_SUPERIOR:
-        return 30000
-    if draw == REPETITION_INFERIOR:
-        return -30000
-    return None
+    return DRAW_VALUES.get(draw)
 
 
 def alphabeta(board, alpha, beta, depth):

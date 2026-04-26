@@ -46,7 +46,7 @@ HAND_PIECE_VALUES = [
 ]
 
 
-def eval(board):
+def evaluate(board):
     value = sum(PIECE_VALUES[piece] for piece in board.pieces)
     value += sum(
         HAND_PIECE_VALUES[hand_piece]
@@ -89,7 +89,7 @@ def alphabeta(board, alpha, beta, depth):
             if depth > 1:
                 value = -alphabeta(board, -beta, -alpha, depth - 1)
             else:
-                value = -eval(board)
+                value = -evaluate(board)
         else:
             value = -checked_value
         board.pop()

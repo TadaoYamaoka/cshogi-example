@@ -1,5 +1,4 @@
-from cshogi import *
-import random
+from cshogi import BLACK, WHITE, HAND_PIECES, REPETITION_DRAW, REPETITION_WIN, REPETITION_LOSE, REPETITION_SUPERIOR, REPETITION_INFERIOR, Board, move_to_usi
 
 
 PIECE_VALUES = [
